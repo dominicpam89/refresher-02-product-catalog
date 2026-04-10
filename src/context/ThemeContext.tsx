@@ -1,4 +1,4 @@
-import { createContext, useEffect, useMemo } from 'react'
+import { createContext, useContext, useEffect, useMemo } from 'react'
 import type { Theme, ThemeState, ThemeProviderProps } from '@/type'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 
@@ -19,11 +19,11 @@ function getSystemTheme() {
 export default function ThemeContextProvider({
   storageKey = STORAGE_KEY,
   children,
-  defaultTheme,
+  defaultTheme = 'dark',
 }: ThemeProviderProps) {
   const { storedVal: theme, setValue: changeTheme } = useLocalStorage<Theme>(
     storageKey,
-    defaultTheme || 'dark'
+    defaultTheme
   )
   const resolvedTheme = useMemo(() => {
     return theme === 'system' ? getSystemTheme() : theme
@@ -51,4 +51,10 @@ export default function ThemeContextProvider({
 
   const value = useMemo(() => ({ theme, changeTheme }), [theme, changeTheme])
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+}
+
+export function useTheme() {
+  const ctx = useContext(ThemeContext)
+  if (!ctx) throw new Error('useTheme must be used within <ThemeProvider>')
+  return ctx
 }
