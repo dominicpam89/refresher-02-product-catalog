@@ -1,0 +1,7 @@
+export { AnimatedHeading } from './AnimatedHeading'
+export { HeroSection } from './HeroSection'
+export { StackSection } from './StackSection'
+export { ProjectSection } from './ProjectSection'
+export { PhilosophySection } from './PhilosophySection'
+export { FooterSection } from './FooterSection'
+export { fadeUp } from '@/lib/homepage'
