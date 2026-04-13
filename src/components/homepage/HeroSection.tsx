@@ -2,8 +2,9 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { GitForkIcon, ArrowUpRight } from 'lucide-react'
+import { GitForkIcon, ArrowUpRight, ShoppingBagIcon } from 'lucide-react'
 import { AnimatedHeading } from './AnimatedHeading'
+import { Link } from 'react-router'
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -85,6 +86,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.5 }}
         >
+          {/* Author */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
               <span className="text-primary font-heading font-black text-sm">D</span>
@@ -96,7 +98,21 @@ export function HeroSection() {
               <p className="text-xs text-muted-foreground">Solopreneur · Full-Stack Dev</p>
             </div>
           </div>
+
           <Separator orientation="vertical" className="h-8 hidden sm:block" />
+
+          {/* CTA — Browse Products (internal) */}
+          <Button
+            className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            asChild
+          >
+            <Link to="/products">
+              <ShoppingBagIcon className="w-4 h-4" />
+              Browse Products
+            </Link>
+          </Button>
+
+          {/* CTA — GitHub (external) */}
           <Button
             variant="outline"
             className="gap-2 border-primary/30 hover:border-primary hover:text-primary transition-colors"
